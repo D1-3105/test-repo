@@ -316,7 +316,7 @@ testing = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "skrample", extras = ["all"], specifier = "==0.1.1" }]
+requires-dist = [{ name = "skrample", extras = ["all"], specifier = "==0.2.0" }]
 
 [package.metadata.requires-dev]
 testing = [
@@ -336,14 +336,14 @@ wheels = [
 
 [[package]]
 name = "skrample"
-version = "0.1.1"
+version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e7/36/ef0a420347e44a132b9e9c88b5d2016e72bf03f506e0d9a6434d8e2fed64/skrample-0.1.1.tar.gz", hash = "sha256:ba3334feb3c7f41e1fe4f4324ab173f77cc2479649fcc32747736fe14a366c27", size = 21903, upload-time = "2025-04-11T20:20:35.237Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/84/5a/2b7990c17243bb86bdb378c28b5cbf724b3f3a2b2575d99fff6eb6137d11/skrample-0.2.0.tar.gz", hash = "sha256:89f9ddda41f412189dcb604e24bff2aef1a788596dbb83b77cdc30bdc8376b4e", size = 28590, upload-time = "2025-04-11T20:20:36.391Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0f/1a/143c24248bf4fce570d6cfda67b1d865918c3a42b0390fe482d7d0887a97/skrample-0.1.1-py3-none-any.whl", hash = "sha256:90b84da4d4ceaca175dcdcd06a4b472156bcf8d2adab78a54f42fde30e18608e", size = 19250, upload-time = "2025-04-11T20:20:31.864Z" },
+    { url = "https://files.pythonhosted.org/packages/e5/e3/7bf94d808ddb74010a2e9d353121148d6db7992c93e0de0cef9b4c45812b/skrample-0.2.0-py3-none-any.whl", hash = "sha256:36fc37c3f04c1a3d9d5f62d360e003d8a9c183cbde9521c933a1a3f181595d35", size = 23615, upload-time = "2025-04-11T20:20:33.182Z" },
 ]
 
 [package.optional-dependencies]

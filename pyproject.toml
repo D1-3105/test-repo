@@ -1,0 +1,20 @@
+[project]
+name = "sd-base-api"
+dynamic = ["version"]
+readme = "README.md"
+requires-python = "==3.12.*"
+dependencies = [
+    "skrample[all]==0.2.0"
+]
+
+[tool.setuptools]
+py-modules = []
+
+[tool.ruff]
+line-length = 120
+
+[tool.uv]
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+[dependency-groups]
+testing = ["pyright==1.1.*", "pytest==8.3.*", "ruff==0.9.*"]

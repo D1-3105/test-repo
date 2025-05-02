@@ -1,6 +1,7 @@
 name: Sync requirements.txt with uv
 
 on:
+
   workflow_dispatch:
   pull_request:
     paths:

@@ -4,7 +4,7 @@ dynamic = ["version"]
 readme = "README.md"
 requires-python = "==3.12.*"
 dependencies = [
-    "skrample @ git+https://github.com/Beinsezii/skrample/0a3ffb60026a0b4ec945cbdbdaed68fb1f3ade5c"
+    "skrample @ git+https://github.com/Beinsezii/skrample.git@0a3ffb60026a0b4ec945cbdbdaed68fb1f3ade5c"
 ]
 
 [tool.setuptools]

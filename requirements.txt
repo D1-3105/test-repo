@@ -62,7 +62,7 @@ setuptools==80.1.0 ; platform_machine == 'x86_64' and sys_platform == 'linux'
     # via
     #   torch
     #   triton
-skrample==0.1.0 ; platform_machine == 'x86_64' and sys_platform == 'linux'
+skrample==0.1.1 ; platform_machine == 'x86_64' and sys_platform == 'linux'
     # via sd-base-api
 sympy==1.14.0 ; platform_machine == 'x86_64' and sys_platform == 'linux'
     # via torch

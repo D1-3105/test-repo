@@ -2,6 +2,9 @@ name: Sync requirements.txt with uv
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'pyproject.toml'
   pull_request:
     paths:
       - 'pyproject.toml'
@@ -13,6 +16,10 @@ permissions:
 
 jobs:
   update-requirements:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'push' && github.event.pull_request == null)
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -35,7 +42,13 @@ jobs:
         git add uv.lock
         # Only commit if there are changes
         if [ -n "$(git status --porcelain --untracked=no)" ]; then
-          git commit -m "Beep boop: updated requirements.txt for ${{ github.event_name }} #${{ github.event.number }}"
+          if [ "${{ github.event_name }}" = "push" ]; then
+            SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+            REF="@${SHORT_SHA}"
+          else
+            REF="#${{ github.event.number }}"
+          fi
+          git commit -m "Beep boop: updated requirements.txt for ${{ github.event_name }} $REF"
           git push
           echo "Changes committed and pushed to the PR branch."
         else

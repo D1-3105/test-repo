@@ -1,4 +1,4 @@
-name: Sync requirements.txt with uv for ${{ github.event_name }} №${{ github.event.number }}
+name: Sync requirements.txt with uv
 
 on:
   workflow_dispatch:

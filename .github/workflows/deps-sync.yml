@@ -47,8 +47,10 @@ jobs:
         git add uv.lock
 
         if [ -n "$(git status --porcelain --untracked=no)" ]; then
-          if gh pr view --state open --json number --jq '.number' >/dev/null 2>&1; then
-            PR_NUMBER=$(gh pr view --json number --jq '.number')
+          BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          PR_NUMBER=$(gh pr list --state open --head "$BRANCH" --json number --jq '.[0].number')
+          
+          if [ -n "$PR_NUMBER" ]; then
             REF="#${PR_NUMBER}"
             EVENT_TYPE="pull_request"
           else

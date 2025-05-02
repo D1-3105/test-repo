@@ -4,7 +4,7 @@ dynamic = ["version"]
 readme = "README.md"
 requires-python = "==3.12.*"
 dependencies = [
-    "skrample[all]==0.1.0"
+    "skrample[all]==0.1.1"
 ]
 
 [tool.setuptools]

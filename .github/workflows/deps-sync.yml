@@ -43,7 +43,8 @@ jobs:
         # Only commit if there are changes
         if [ -n "$(git status --porcelain --untracked=no)" ]; then
           if [ "${{ github.event_name }}" = "push" ]; then
-            REF="@${{ github.sha::7 }}"
+            SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+            REF="@${SHORT_SHA}"
           else
             REF="#${{ github.event.number }}"
           fi

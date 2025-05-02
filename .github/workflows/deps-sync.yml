@@ -38,7 +38,7 @@ jobs:
         git add uv.lock
         # Only commit if there are changes
         if [ -n "$(git status --porcelain --untracked=no)" ]; then
-          git commit -m "󰚩 Beep boop: updated requirements.txt via uv export"
+          git commit -m "Beep boop: updated requirements.txt for ${{ github.event_name }} #${{ github.event.number }}"
           git push
           echo "Changes committed and pushed to the PR branch."
         else

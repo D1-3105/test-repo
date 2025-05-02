@@ -47,8 +47,7 @@ jobs:
         git add uv.lock
 
         if [ -n "$(git status --porcelain --untracked=no)" ]; then
-          # Проверяем наличие PR через gh, используем bash и защиту от ошибок
-          if gh pr view --json number --jq '.number' >/dev/null 2>&1; then
+          if gh pr view --state open --json number --jq '.number' >/dev/null 2>&1; then
             PR_NUMBER=$(gh pr view --json number --jq '.number')
             REF="#${PR_NUMBER}"
             EVENT_TYPE="pull_request"

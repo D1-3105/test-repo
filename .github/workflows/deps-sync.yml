@@ -39,6 +39,7 @@ jobs:
     - name: Commit changes to the PR branch
       env:
         GH_TOKEN: ${{ github.token }}
+      shell: bash
       run: |
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
@@ -46,6 +47,7 @@ jobs:
         git add uv.lock
 
         if [ -n "$(git status --porcelain --untracked=no)" ]; then
+          # Проверяем наличие PR через gh, используем bash и защиту от ошибок
           if gh pr view --json number --jq '.number' >/dev/null 2>&1; then
             PR_NUMBER=$(gh pr view --json number --jq '.number')
             REF="#${PR_NUMBER}"
@@ -63,6 +65,3 @@ jobs:
           echo "No changes to commit."
         fi
 
-        else
-          echo "No changes to commit."
-        fi

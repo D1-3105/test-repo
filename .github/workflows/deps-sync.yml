@@ -2,6 +2,11 @@ name: Sync requirements.txt with uv
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'pyproject.toml'
+      - 'requirements.txt'
+      - 'uv.lock'
   pull_request:
     paths:
       - 'pyproject.toml'

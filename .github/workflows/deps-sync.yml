@@ -1,6 +1,7 @@
 name: Sync requirements.txt with uv
 
 on:
+
   workflow_dispatch:
   pull_request:
     paths:
@@ -24,7 +25,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: ${{ github.head_ref }}
+        ref: ${{ github.head_ref || github.ref_name }}
+
     - uses: astral-sh/setup-uv@v5
       with:
         enable-cache: true
@@ -35,22 +37,32 @@ jobs:
         uv export --no-hashes > requirements.txt
 
     - name: Commit changes to the PR branch
+      env:
+        GH_TOKEN: ${{ github.token }}
+      shell: bash
       run: |
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
         git add requirements.txt
         git add uv.lock
-        # Only commit if there are changes
+
         if [ -n "$(git status --porcelain --untracked=no)" ]; then
-          if [ "${{ github.event_name }}" = "push" ]; then
+          BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          PR_NUMBER=$(gh pr list --state open --head "$BRANCH" --json number --jq '.[0].number')
+          
+          if [ -n "$PR_NUMBER" ]; then
+            REF="#${PR_NUMBER}"
+            EVENT_TYPE="pull_request"
+          else
             SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
             REF="@${SHORT_SHA}"
-          else
-            REF="#${{ github.event.number }}"
+            EVENT_TYPE="push"
           fi
-          git commit -m "Beep boop: updated requirements.txt for ${{ github.event_name }} $REF"
+
+          git commit -m "Beep boop: updated requirements.txt for ${EVENT_TYPE} ${REF}"
           git push
-          echo "Changes committed and pushed to the PR branch."
+          echo "Changes committed and pushed to the branch."
         else
           echo "No changes to commit."
         fi
+
